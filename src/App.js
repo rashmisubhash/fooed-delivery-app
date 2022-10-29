@@ -5,13 +5,13 @@ import LandingPage from "./pages/LandingPage";
 import RestaurentTemplate from "./pages/RestaurentMenu/RestaurentTemplate";
 
 // import { LastLocationProvider } from "react-router-last-location";
-import { BrowserRouter, Switch, Routes, Route, Link } from "react-router-dom";
+import { HashRouter, Switch, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Nav />
-      <BrowserRouter
+      <HashRouter
         basename="/
 zometoe-workshop"
       >
@@ -22,7 +22,7 @@ zometoe-workshop"
         <Route exact path="/order" element={<RestaurentTemplate />}></Route>
         {/* </Routes> */}
         {/* </LastLocationProvider> */}
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
