@@ -75,8 +75,8 @@ const Restaurents = () => {
   ]);
 
   const fetchURL =
-    // "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant";
-    "https://raw.githubusercontent.com/euhidaman/Fake_APIs/main/restaurant_details.json";
+    "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant";
+  // "https://raw.githubusercontent.com/euhidaman/Fake_APIs/main/restaurant_details.json";
 
   useEffect(() => {
     getAllResDetails();
