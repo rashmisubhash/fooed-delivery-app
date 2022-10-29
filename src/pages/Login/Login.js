@@ -53,7 +53,7 @@ const Login = () => {
 
               <div class="login-help mt-2">
                 <button className="" onClick={() => setLogin(false)}>
-                  Don't have an account? Sign-up
+                  Don't have an account? Sign up
                 </button>
               </div>
             </div>
