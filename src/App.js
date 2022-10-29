@@ -11,15 +11,18 @@ function App() {
   return (
     <>
       <Nav />
-      {/* <BrowserRouter> */}
-      {/* <LastLocationProvider> */}
-      {/* //  <LandingPage /> */}
-      <Routes>
-        <Route exact path="/" element={<LandingPage />}></Route>
-        <Route exact path="/order" element={<RestaurentTemplate />}></Route>
-      </Routes>
-      {/* </LastLocationProvider> */}
-      {/* </BrowserRouter> */}
+      <BrowserRouter
+        basename="/
+zometoe-workshop"
+      >
+        {/* <LastLocationProvider> */}
+        {/* //  <LandingPage /> */}
+        <Routes>
+          <Route exact path="/" element={<LandingPage />}></Route>
+          <Route exact path="/order" element={<RestaurentTemplate />}></Route>
+        </Routes>
+        {/* </LastLocationProvider> */}
+      </BrowserRouter>
     </>
   );
 }
