@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/zometoe-workshop/static/css/main.f8555d7e.css",
-    "main.js": "/zometoe-workshop/static/js/main.d9d3def9.js",
-    "static/js/787.15c4e52c.chunk.js": "/zometoe-workshop/static/js/787.15c4e52c.chunk.js",
-    "static/media/restaurant1.jpg": "/zometoe-workshop/static/media/restaurant1.4110222ed96379e04bc1.jpg",
-    "static/media/pizza.jpg": "/zometoe-workshop/static/media/pizza.23272eb407e33a7e4cc4.jpg",
-    "static/media/restaurant2.jpg": "/zometoe-workshop/static/media/restaurant2.0812674c60421f107771.jpg",
-    "static/media/restaurant4.jpg": "/zometoe-workshop/static/media/restaurant4.8b62728a105496905304.jpg",
-    "static/media/burger.jpg": "/zometoe-workshop/static/media/burger.b1234e6bc91f7e42b85d.jpg",
-    "static/media/restaurant3.jpg": "/zometoe-workshop/static/media/restaurant3.86320ebc13ad25054d90.jpg",
-    "static/media/iceCream.jpg": "/zometoe-workshop/static/media/iceCream.e7e9a9cf0c7ed6eb2600.jpg",
-    "static/media/hero.jpg": "/zometoe-workshop/static/media/hero.8e6066002d3e4a119fa4.jpg",
-    "static/media/landingPageImage.jpg": "/zometoe-workshop/static/media/landingPageImage.e816360cf5c99fc51af2.jpg",
-    "static/media/logo.png": "/zometoe-workshop/static/media/logo.b45186d0433dabefc6d2.png",
-    "static/media/zomatoWhiteLogog.avif": "/zometoe-workshop/static/media/zomatoWhiteLogog.1ae65b752fea00650c30.avif",
-    "static/media/heroShape.svg": "/zometoe-workshop/static/media/heroShape.4db4a98167e6f9786c1383220ea21bb0.svg",
-    "index.html": "/zometoe-workshop/index.html",
-    "static/media/herobgpattren.svg": "/zometoe-workshop/static/media/herobgpattren.688ccd98dda5cd0ef7c9e9c35dc0c23a.svg",
-    "main.f8555d7e.css.map": "/zometoe-workshop/static/css/main.f8555d7e.css.map",
-    "main.d9d3def9.js.map": "/zometoe-workshop/static/js/main.d9d3def9.js.map",
-    "787.15c4e52c.chunk.js.map": "/zometoe-workshop/static/js/787.15c4e52c.chunk.js.map"
+    "main.css": "./static/css/main.f8555d7e.css",
+    "main.js": "./static/js/main.67a1da64.js",
+    "static/js/787.15c4e52c.chunk.js": "./static/js/787.15c4e52c.chunk.js",
+    "static/media/restaurant1.jpg": "./static/media/restaurant1.4110222ed96379e04bc1.jpg",
+    "static/media/pizza.jpg": "./static/media/pizza.23272eb407e33a7e4cc4.jpg",
+    "static/media/restaurant2.jpg": "./static/media/restaurant2.0812674c60421f107771.jpg",
+    "static/media/restaurant4.jpg": "./static/media/restaurant4.8b62728a105496905304.jpg",
+    "static/media/burger.jpg": "./static/media/burger.b1234e6bc91f7e42b85d.jpg",
+    "static/media/restaurant3.jpg": "./static/media/restaurant3.86320ebc13ad25054d90.jpg",
+    "static/media/iceCream.jpg": "./static/media/iceCream.e7e9a9cf0c7ed6eb2600.jpg",
+    "static/media/hero.jpg": "./static/media/hero.8e6066002d3e4a119fa4.jpg",
+    "static/media/landingPageImage.jpg": "./static/media/landingPageImage.e816360cf5c99fc51af2.jpg",
+    "static/media/logo.png": "./static/media/logo.b45186d0433dabefc6d2.png",
+    "static/media/zomatoWhiteLogog.avif": "./static/media/zomatoWhiteLogog.1ae65b752fea00650c30.avif",
+    "static/media/heroShape.svg": "./static/media/heroShape.4db4a98167e6f9786c1383220ea21bb0.svg",
+    "static/media/herobgpattren.svg": "./static/media/herobgpattren.688ccd98dda5cd0ef7c9e9c35dc0c23a.svg",
+    "index.html": "./index.html",
+    "main.f8555d7e.css.map": "./static/css/main.f8555d7e.css.map",
+    "main.67a1da64.js.map": "./static/js/main.67a1da64.js.map",
+    "787.15c4e52c.chunk.js.map": "./static/js/787.15c4e52c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f8555d7e.css",
-    "static/js/main.d9d3def9.js"
+    "static/js/main.67a1da64.js"
   ]
 }
