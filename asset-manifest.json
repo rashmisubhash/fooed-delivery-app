@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/zometoe-workshop/static/css/main.f8555d7e.css",
-    "main.js": "/zometoe-workshop/static/js/main.88fa4310.js",
+    "main.js": "/zometoe-workshop/static/js/main.d9d3def9.js",
     "static/js/787.15c4e52c.chunk.js": "/zometoe-workshop/static/js/787.15c4e52c.chunk.js",
     "static/media/restaurant1.jpg": "/zometoe-workshop/static/media/restaurant1.4110222ed96379e04bc1.jpg",
     "static/media/pizza.jpg": "/zometoe-workshop/static/media/pizza.23272eb407e33a7e4cc4.jpg",
@@ -18,11 +18,11 @@
     "index.html": "/zometoe-workshop/index.html",
     "static/media/herobgpattren.svg": "/zometoe-workshop/static/media/herobgpattren.688ccd98dda5cd0ef7c9e9c35dc0c23a.svg",
     "main.f8555d7e.css.map": "/zometoe-workshop/static/css/main.f8555d7e.css.map",
-    "main.88fa4310.js.map": "/zometoe-workshop/static/js/main.88fa4310.js.map",
+    "main.d9d3def9.js.map": "/zometoe-workshop/static/js/main.d9d3def9.js.map",
     "787.15c4e52c.chunk.js.map": "/zometoe-workshop/static/js/787.15c4e52c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f8555d7e.css",
-    "static/js/main.88fa4310.js"
+    "static/js/main.d9d3def9.js"
   ]
 }
