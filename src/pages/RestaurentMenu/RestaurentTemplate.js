@@ -69,26 +69,26 @@ const RestaurentTemplate = () => {
     restaurentList != null && (
       <div>
         {/* <header>
-        <nav class="navbar">
-          <div class="navbar-brand">
-            <img src={logo} alt="Logo" class="brand-logo" />
+        <nav className="navbar">
+          <div className="navbar-brand">
+            <img src={logo} alt="Logo" className="brand-logo" />
           </div>
-           <div class="navbar-nav-items">
-          <div class="navbar-nav-item">
-            <button class="button-primary">Order Food</button>
+           <div className="navbar-nav-items">
+          <div className="navbar-nav-item">
+            <button className="button-primary">Order Food</button>
           </div>
         </div> 
         </nav>
       </header> */}
-        <main class="container">
-          <section class="hero-container">
-            <div class="hero-image-container">
+        <main className="container">
+          <section className="hero-container">
+            <div className="hero-image-container">
               <img src={hero} alt="hero image" className="hero-image" />
-              <img src={heroShape} alt="hero shape" class="hero-image-shape" />
+              <img src={heroShape} alt="hero shape" className="hero-image-shape" />
               <img
                 src={heroPattern}
                 alt="hero bg pattern"
-                class="hero-image-pattern"
+                className="hero-image-pattern"
               />
             </div>
             <div className="hero-description">
@@ -110,31 +110,31 @@ const RestaurentTemplate = () => {
               </div>
             </div>
           </section>
-          {/* <section class="video-footage-container">
-          <div class="video-footage"></div>
+          {/* <section className="video-footage-container">
+          <div className="video-footage"></div>
           
         </section> */}
-          <section class="food-list-container">
-            <h1 class="hero-text" style={{ textAlign: "center" }}>
+          <section className="food-list-container">
+            <h1 className="hero-text" style={{ textAlign: "center" }}>
               Explore Our Menu
             </h1>
-            <div class="food-list-container-diagonal"></div>
-            <div class="food-menu-card-list row">
+            <div className="food-list-container-diagonal"></div>
+            <div className="food-menu-card-list row">
               {restaurentMenu.map((item, index) => {
                 return (
                   <div className="col-md-4">
-                    <div class="food-menu-card">
+                    <div className="food-menu-card">
                       <div className="image-container-food">
-                        <button class="button-primary">Order Now</button>
+                        <button className="button-primary">Order Now</button>
                         <img
                           src={item.image_url}
                           alt="burger"
-                          class="food-menu-card-image"
+                          className="food-menu-card-image"
                         />
                       </div>
-                      <div class="food-menu-card-description">
-                        <h4 class="food-menu-card-title">{item.item_name}</h4>
-                        {/* <h4 class="food-menu-card-title">
+                      <div className="food-menu-card-description">
+                        <h4 className="food-menu-card-title">{item.item_name}</h4>
+                        {/* <h4 className="food-menu-card-title">
                           {"Rs " + item.item_price}
                         </h4> */}
                       </div>
@@ -142,38 +142,38 @@ const RestaurentTemplate = () => {
                   </div>
                 );
               })}
-              {/* <div class="food-menu-card">
+              {/* <div className="food-menu-card">
                 <div className="image-container-food">
-                  <button class="button-primary">Order Now</button>
-                  <img src={pizza} alt="pizza" class="food-menu-card-image" />
+                  <button className="button-primary">Order Now</button>
+                  <img src={pizza} alt="pizza" className="food-menu-card-image" />
                 </div>
-                <div class="food-menu-card-description">
-                  <h4 class="food-menu-card-title">Pizza</h4>
+                <div className="food-menu-card-description">
+                  <h4 className="food-menu-card-title">Pizza</h4>
                 </div>
               </div> */}
-              {/* <div class="food-menu-card">
+              {/* <div className="food-menu-card">
                 <div className="image-container-food">
-                  <button class="button-primary">Order Now</button>
+                  <button className="button-primary">Order Now</button>
                   <img
                     src={iceCream}
                     alt="icecream"
-                    class="food-menu-card-image"
+                    className="food-menu-card-image"
                   />
                 </div>
-                <div class="food-menu-card-description">
-                  <h4 class="food-menu-card-title">Ice Cream</h4>
+                <div className="food-menu-card-description">
+                  <h4 className="food-menu-card-title">Ice Cream</h4>
                 </div>
               </div> */}
             </div>
           </section>
-          <section class="restaurant-list-container">
-            <div class="restaurant-list-text">
-              <h1 class="hero-text">
+          <section className="restaurant-list-container">
+            <div className="restaurant-list-text">
+              <h1 className="hero-text">
                 Order food from favourite restaurants near you.
               </h1>
             </div>
-            <div class="restaurant-list-image-container">
-              <div class="restaurant-list-row-1">
+            <div className="restaurant-list-image-container">
+              <div className="restaurant-list-row-1">
                 <img
                   src={restaurant1}
                   alt="resstaurant1"
@@ -185,7 +185,7 @@ const RestaurentTemplate = () => {
                   className="restaurant2"
                 />
               </div>
-              <div class="restaurant-list-row-2">
+              <div className="restaurant-list-row-2">
                 <img
                   src={restaurant3}
                   alt="resstaurant3"
@@ -199,24 +199,24 @@ const RestaurentTemplate = () => {
               </div>
             </div>
           </section>
-          {/* <section class="email-subscribe-container">
+          {/* <section className="email-subscribe-container">
           <div>
-            <h1 class="hero-text">Stay Updated</h1>
-            <div class="email-subscribe-input-field">
+            <h1 className="hero-text">Stay Updated</h1>
+            <div className="email-subscribe-input-field">
               <div>
                 <input
                   type="email"
                   placeholder="email@email.com"
-                  class="email-input"
+                  className="email-input"
                 />
               </div>
-              <button class="button-primary">Get Updates</button>
+              <button className="button-primary">Get Updates</button>
             </div>
           </div>
         </section> */}
-          <section class="quote-container">
-            <div class="quote-image-overlay"></div>
-            <h3 class="quote-image-text">
+          <section className="quote-container">
+            <div className="quote-image-overlay"></div>
+            <h3 className="quote-image-text">
               When a man's stomach is full it makes no difference whether he is
               rich or poor.
             </h3>
