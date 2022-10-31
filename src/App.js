@@ -16,7 +16,7 @@ function App() {
         {/* //  <LandingPage /> */}
         <Routes>
           <Route exact path="/" element={<LandingPage />}></Route>
-          <Route exact path="/order" element={<RestaurentTemplate />}></Route>
+          <Route exact path="/:restuarnet_id/menu" element={<RestaurentTemplate />}></Route>
         </Routes>
         {/* </LastLocationProvider> */}
       </BrowserRouter>

@@ -86,75 +86,9 @@ const Restaurents = () => {
     axios
       .get(fetchURL)
       .then((res) => {
-        const allDetails = res.data.foodDetails;
+        const allDetails = res.data;
         console.log("allDetails", allDetails);
-        setRestaurentList([
-          {
-            id: 1,
-            hotelName: "Pizza Hut",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?pizza",
-            hotelType: "North India, Chinese",
-            hotelRating: "4.6",
-            discount: "₹120 OFF",
-            time: "10 min",
-            price: "₹400 for One",
-            description: "A common pizza in the United States",
-          },
-          {
-            id: 2,
-            hotelName: "Burger King",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?burger",
-            hotelType: "South India, Veg",
-            hotelRating: "4.8",
-            discount: "₹100 OFF",
-            time: "10 min",
-            price: "₹100 for One",
-          },
-          {
-            id: 3,
-            hotelName: "Caramel Shake",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?milkshake",
-            hotelType: "South India, Veg",
-            hotelRating: "3.6",
-            discount: "₹50 OFF",
-            time: "10 min",
-            price: "₹100 for One",
-            description: "A common burger in the United States",
-          },
-          {
-            id: 4,
-            hotelName: "FreshMenu",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?noodles",
-            hotelType: "South India, Veg",
-            hotelRating: "3.6",
-            discount: "₹250 OFF",
-            time: "10 min",
-            price: "₹100 for One",
-            description: "A common burger in the United States",
-          },
-          {
-            id: 3,
-            hotelName: "Caramel Shake",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?milkshake",
-            hotelType: "South India, Veg",
-            hotelRating: "3.6",
-            discount: "₹50 OFF",
-            time: "10 min",
-            price: "₹100 for One",
-            description: "A common burger in the United States",
-          },
-          {
-            id: 4,
-            hotelName: "FreshMenu",
-            hotelUrl: "https://source.unsplash.com/random/300×300/?noodles",
-            hotelType: "South India, Veg",
-            hotelRating: "3.6",
-            discount: "₹250 OFF",
-            time: "10 min",
-            price: "₹100 for One",
-            description: "A common burger in the United States",
-          },
-        ]);
+        setRestaurentList(allDetails);
       })
       .catch((err) => {
         console.log(err);
@@ -172,24 +106,24 @@ const Restaurents = () => {
                   style={{ width: "22rem", border: "none" }}
                   className="hove mb-2 py-3"
                   onClick={() => {
-                    history("/order");
+                    history(`/${element.restaurant_id}/menu`);
                   }}
                 >
                   <Card.Img
                     variant="top"
                     className="cd"
-                    src={element.hotelUrl}
+                    src={element.restaurant_logo_image}
                   />
 
                   <div className="card_body">
                     <div className="upper_data d-flex justify-content-between align-items-center">
-                      <h4 className="mt-2">{element.hotelName}</h4>
-                      <span>{element.hotelRating}&nbsp;★</span>
+                      <h4 className="mt-2">{element.restaurant_name}</h4>
+                      <span>{additionalInfo[k].hotelRating}&nbsp;★</span>
                     </div>
 
                     <div className="lower_data d-flex  justify-content-between">
                       {/* <h5>{element.address}</h5> */}
-                      <span>{element.price}</span>
+                      <span>{element.restaurant_address}</span>
                     </div>
 
                     <div className="extra"></div>
