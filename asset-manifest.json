@@ -1,12 +1,13 @@
 {
   "files": {
     "main.css": "./static/css/main.7cd9ac8f.css",
-    "main.js": "./static/js/main.b1ac18be.js",
+    "main.js": "./static/js/main.d4bd98de.js",
     "static/js/787.15c4e52c.chunk.js": "./static/js/787.15c4e52c.chunk.js",
     "static/media/restaurant1.jpg": "./static/media/restaurant1.4110222ed96379e04bc1.jpg",
     "static/media/restaurant2.jpg": "./static/media/restaurant2.0812674c60421f107771.jpg",
     "static/media/restaurant4.jpg": "./static/media/restaurant4.8b62728a105496905304.jpg",
     "static/media/restaurant3.jpg": "./static/media/restaurant3.86320ebc13ad25054d90.jpg",
+    "static/media/hero.jpg": "./static/media/hero.8e6066002d3e4a119fa4.jpg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "./static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/landingPageImage.jpg": "./static/media/landingPageImage.e816360cf5c99fc51af2.jpg",
     "static/media/fontawesome-webfont.eot": "./static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -19,11 +20,11 @@
     "static/media/heroShape.svg": "./static/media/heroShape.4db4a98167e6f9786c1383220ea21bb0.svg",
     "static/media/herobgpattren.svg": "./static/media/herobgpattren.688ccd98dda5cd0ef7c9e9c35dc0c23a.svg",
     "main.7cd9ac8f.css.map": "./static/css/main.7cd9ac8f.css.map",
-    "main.b1ac18be.js.map": "./static/js/main.b1ac18be.js.map",
+    "main.d4bd98de.js.map": "./static/js/main.d4bd98de.js.map",
     "787.15c4e52c.chunk.js.map": "./static/js/787.15c4e52c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7cd9ac8f.css",
-    "static/js/main.b1ac18be.js"
+    "static/js/main.d4bd98de.js"
   ]
 }
