@@ -87,7 +87,6 @@ const Restaurents = () => {
       .get(fetchURL)
       .then((res) => {
         const allDetails = res.data;
-        console.log("allDetails", allDetails);
         setRestaurentList(allDetails);
       })
       .catch((err) => {

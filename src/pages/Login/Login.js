@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-const Login = () => {
+import Login from "../../auth/Login";
+import Signup from "../../auth/Signup";
+
+const LoginModal = ({ getUserData, setOpenModal }) => {
   const [login, setLogin] = useState(true);
   const [inputData, setInputData] = useState({
     name: "",
@@ -25,31 +28,7 @@ const Login = () => {
             <div class="loginmodal-container">
               <h1>Log in</h1>
               <br />
-              <input
-                type="text"
-                name="user"
-                placeholder="Email ID"
-                value={input.email}
-                onChange={(event) =>
-                  setInput({ ...input, email: event.target.value })
-                }
-              />
-              <input
-                type="password"
-                name="pass"
-                placeholder="Password"
-                value={input.password}
-                onChange={(event) =>
-                  setInput({ ...input, password: event.target.value })
-                }
-              />
-              <button
-                type="submit"
-                name="login"
-                class="button-primary btn-custom w-100"
-              >
-                Log in
-              </button>
+              <Login setOpenModal={setOpenModal} />
 
               <div class="login-help mt-2">
                 <button className="" onClick={() => setLogin(false)}>
@@ -65,57 +44,7 @@ const Login = () => {
             <div class="loginmodal-container">
               <h1>Sign Up</h1>
               <br />
-              <input
-                type="text"
-                name="user"
-                className="input"
-                placeholder="Email ID"
-                value={input.email}
-                onChange={(event) =>
-                  setInput({ ...input, email: event.target.value })
-                }
-              />
-              <input
-                type="password"
-                name="pass"
-                className="input"
-                placeholder="Password"
-                value={input.password}
-                onChange={(event) =>
-                  setInput({ ...input, password: event.target.value })
-                }
-              />
-              <input
-                type="text"
-                name="user"
-                className="input"
-                placeholder="Phone number"
-                value={input.phno}
-                onChange={(event) =>
-                  setInput({ ...input, phno: event.target.value })
-                }
-              />
-
-              <textarea
-                rows="4"
-                className="w-100 input area-input"
-                placeholder="Address..."
-                value={inputData.address}
-                onChange={(event) =>
-                  setInput({
-                    ...inputData,
-                    address: event.target.value,
-                  })
-                }
-              ></textarea>
-
-              <button
-                type="submit"
-                name="login"
-                class="button-primary btn-custom w-100"
-              >
-                Sign up
-              </button>
+              <Signup setOpenModal={setOpenModal} />
 
               <div className="login-help mt-2">
                 <button className="" onClick={() => setLogin(true)}>
@@ -164,8 +93,7 @@ const Login = () => {
           position: relative;
         }
 
-        .loginmodal-container input[type="text"],
-        input[type="password"] {
+        .input {
           height: 44px;
           font-size: 16px;
           width: 100%;
@@ -180,8 +108,7 @@ const Login = () => {
           -moz-box-sizing: border-box;
         }
 
-        .loginmodal-container input[type="text"]:hover,
-        input[type="password"]:hover {
+        .input:hover {
           border: 1px solid #b9b9b9;
           border-top: 1px solid #a0a0a0;
           -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -261,4 +188,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginModal;

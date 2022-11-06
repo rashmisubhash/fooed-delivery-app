@@ -1,44 +1,72 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
+import OrderModal from "../Orders/OrderModal";
 import "./templace.css";
 
-import hero from "../../assets/hero.jpg";
-import heroShape from "../../assets/svg/heroShape.svg";
-import heroPattern from "../../assets/svg/herobgpattren.svg";
-import burger from "../../assets/burger.jpg";
-import pizza from "../../assets/pizza.jpg";
+import Dropdown from "../../components/Dropdown";
+import { AccountContext } from "../../auth/Account";
+import { successToaster, errorToaster } from "../../reusable/Toast";
 
-import iceCream from "../../assets/iceCream.jpg";
-import restaurant1 from "../../assets/restaurant1.jpg";
-import restaurant2 from "../../assets/restaurant2.jpg";
-import restaurant3 from "../../assets/restaurant3.jpg";
-import restaurant4 from "../../assets/restaurant4.jpg";
-import logo from "../../assets/logo.png";
+const RestaurentTemplate = ({ status }) => {
+  const [restaurentInfo, setRestaurentInfo] = useState(null);
+  const [menuItemsForRes, setMenuItemsForRes] = useState(null);
+  const [menu, setMenu] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
+  const [order, setOrder] = useState(false);
 
-const RestaurentTemplate = () => {
-  const [restaurentList, setRestaurentList] = useState(null);
-  const [restaurentMenu, setRestaurentMenu] = useState(null);
-
-  const fetchURL =
-    "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant";
-  // "https://raw.githubusercontent.com/euhidaman/Fake_APIs/main/restaurant_details.json";
+  const { getUserData } = useContext(AccountContext);
 
   useEffect(() => {
     getResDetails();
-    console.log(document.location.pathname.substring(1, 6));
+    getMenuDetails();
+    getMenuItemsForRes();
   }, []);
 
   const getResDetails = () => {
     axios
-      .get(fetchURL)
+      .get(
+        "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant"
+      )
       .then((res) => {
         const allDetails = res.data;
         res.data.map((item) => {
           if (item.restaurant_id === document.location.pathname.substring(1, 6))
-            setRestaurentList(item);
+            setRestaurentInfo(item);
         });
-        console.log("allDetails", allDetails);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMenuDetails = () => {
+    axios
+      .get(
+        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menu?restaurant_id=${document.location.pathname.substring(
+          1,
+          6
+        )}`
+      )
+      .then((res) => {
+        setMenu(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMenuItemsForRes = () => {
+    axios
+      .get(
+        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menuitem?restaurant_id=${document.location.pathname.substring(
+          1,
+          6
+        )}`
+      )
+      .then((res) => {
+        const allDetails = res.data;
+        setMenuItemsForRes(allDetails);
       })
       .catch((err) => {
         console.log(err);
@@ -46,58 +74,105 @@ const RestaurentTemplate = () => {
   };
 
   useEffect(() => {
-    getAllResDetails();
-  }, []);
+    // Filter change
+    if (selectedType != null) {
+      axios
+        .get(
+          `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menuitem?menu_id=${selectedType.value}`
+        )
+        .then((res) => {
+          // setMenuItemsForRes(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [selectedType]);
 
-  const getAllResDetails = () => {
+  function setOrderFunction(item) {
+    const body = {
+      restaurant_id: item.restaurant_id,
+      order_amount: item.item_price,
+      order_discount: 0,
+      order_placed_at: "28 Oct 2022, 10 AM",
+      order_amount_final: item.item_price,
+      items:
+        item.item_id +
+        "," +
+        item.item_name +
+        "," +
+        item.item_price +
+        "," +
+        item.image_url,
+      // items: "IT003,Veg Manchurian Gravy,150,http://awssatraining.s3-website-us-east-1.amazonaws.com/veg_manchurian.jfif; IT002,Veg Fried Rice,120,http://awssatraining.s3-website-us-east-1.amazonaws.com/veg_fried_rice.jfif",
+      Type: "Order",
+      customer_mobile: getUserData().idToken.payload.phone_number.slice(1),
+      order_status: "Order Placed",
+      // order_id: "OR0001",
+      // ID: "A00015",
+      menu_id: item.menu_id,
+      // NewValue: "",
+      customer_name: getUserData().idToken.payload.name,
+    };
+
     axios
-      .get(
-        "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menuitem?restaurant_id=R0001"
+      .post(
+        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/order`,
+        body
       )
       .then((res) => {
-        const allDetails = res.data;
-        console.log("allDetails", allDetails);
-        setRestaurentMenu(allDetails);
+        if (res.data.statusCode === 200);
+        successToaster("Successfully place the order");
+        console.log("res", res);
+        setOrder(true);
+
+        // setMenuItemsForRes(res.data);
       })
       .catch((err) => {
         console.log(err);
+        errorToaster("Something went wrong!");
       });
-  };
+  }
 
   return (
-    restaurentMenu != null &&
-    restaurentList != null && (
+    menuItemsForRes != null &&
+    restaurentInfo != null &&
+    menu != null && (
       <div>
-        {/* <header>
-        <nav className="navbar">
-          <div className="navbar-brand">
-            <img src={logo} alt="Logo" className="brand-logo" />
-          </div>
-           <div className="navbar-nav-items">
-          <div className="navbar-nav-item">
-            <button className="button-primary">Order Food</button>
-          </div>
-        </div> 
-        </nav>
-      </header> */}
+        {console.log(getUserData())}
+        <OrderModal order={order} setOrder={setOrder} status={status} />
         <main className="container">
           <section className="hero-container">
             <div className="hero-image-container">
-              <img src={hero} alt="hero image" className="hero-image" />
-              <img src={heroShape} alt="hero shape" className="hero-image-shape" />
               <img
-                src={heroPattern}
+                src={
+                  "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/hero.jpg"
+                }
+                alt="hero"
+                className="hero-image"
+              />
+              <img
+                src={
+                  "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/heroShape.svg"
+                }
+                alt="hero shape"
+                className="hero-image-shape"
+              />
+              <img
+                src={
+                  "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/herobgpattren.svg"
+                }
                 alt="hero bg pattern"
                 className="hero-image-pattern"
               />
             </div>
             <div className="hero-description">
               <h1 className="restaurent-name text-center">
-                {restaurentList.restaurant_name}
+                {restaurentInfo.restaurant_name}
               </h1>
-              {/* <p>{restaurentList.restaurant_type}</p>
-              <p>{restaurentList.restaurant_description}</p>
-              <p>{restaurentList.restaurant_address}</p> */}
+              {/* <p>{restaurentInfo.restaurant_type}</p>
+              <p>{restaurentInfo.restaurant_description}</p>
+              <p>{restaurentInfo.restaurant_address}</p> */}
               <h1 className="hero-text">
                 Order food from your favourite restaurant.
               </h1>
@@ -110,36 +185,62 @@ const RestaurentTemplate = () => {
               </div>
             </div>
           </section>
-          {/* <section className="video-footage-container">
-          <div className="video-footage"></div>
-          
-        </section> */}
+
           <section className="food-list-container">
             <h1 className="hero-text" style={{ textAlign: "center" }}>
               Explore Our Menu
             </h1>
             <div className="food-list-container-diagonal"></div>
-            <div className="food-menu-card-list row">
-              {restaurentMenu.map((item, index) => {
+            {menu.length > 0 && (
+              <div className="d-flex justify-content-center mb-4 mt-5">
+                <div className="">
+                  <Dropdown
+                    menu={menu}
+                    selectedType={selectedType}
+                    setSelectedType={setSelectedType}
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="food-menu-card-list row mx-0">
+              {menuItemsForRes.map((item, index) => {
                 return (
-                  <div className="col-md-4">
-                    <div className="food-menu-card">
-                      <div className="image-container-food">
-                        <button className="button-primary">Order Now</button>
-                        <img
-                          src={item.image_url}
-                          alt="burger"
-                          className="food-menu-card-image"
-                        />
-                      </div>
-                      <div className="food-menu-card-description">
-                        <h4 className="food-menu-card-title">{item.item_name}</h4>
-                        {/* <h4 className="food-menu-card-title">
+                  (selectedType == null ||
+                    (selectedType != null &&
+                      selectedType.value == item.menu_id)) && (
+                    <div className="col-md-4">
+                      <div className="food-menu-card">
+                        <div className="image-container-food">
+                          <button
+                            className="button-primary"
+                            onClick={() =>
+                              getUserData() !== null
+                                ? setOrderFunction(item)
+                                : errorToaster(
+                                    "Please log in to place the order"
+                                  )
+                            }
+                          >
+                            Order Now
+                          </button>
+                          <img
+                            src={item.image_url}
+                            alt="burger"
+                            className="food-menu-card-image"
+                          />
+                        </div>
+                        <div className="food-menu-card-description">
+                          <h4 className="food-menu-card-title">
+                            {item.item_name}
+                          </h4>
+                          {/* <h4 className="food-menu-card-title">
                           {"Rs " + item.item_price}
                         </h4> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )
                 );
               })}
               {/* <div className="food-menu-card">
@@ -175,24 +276,32 @@ const RestaurentTemplate = () => {
             <div className="restaurant-list-image-container">
               <div className="restaurant-list-row-1">
                 <img
-                  src={restaurant1}
+                  src={
+                    "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/restaurant1.jpg"
+                  }
                   alt="resstaurant1"
                   className="restaurant1"
                 />
                 <img
-                  src={restaurant2}
+                  src={
+                    "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/restaurant2.jpg"
+                  }
                   alt="resstaurant2"
                   className="restaurant2"
                 />
               </div>
               <div className="restaurant-list-row-2">
                 <img
-                  src={restaurant3}
+                  src={
+                    "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/restaurant3.jpg"
+                  }
                   alt="resstaurant3"
                   className="restaurant3"
                 />
                 <img
-                  src={restaurant4}
+                  src={
+                    "https://imagesforwebsite.s3.eu-west-2.amazonaws.com/restaurant4.jpg"
+                  }
                   alt="resstaurant4"
                   className="restaurant4"
                 />
