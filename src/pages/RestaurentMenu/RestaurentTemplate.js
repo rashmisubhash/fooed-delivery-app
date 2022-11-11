@@ -86,7 +86,7 @@ const RestaurentTemplate = ({ status }) => {
       restaurant_id: item.restaurant_id,
       order_amount: item.item_price,
       order_discount: 0,
-      order_placed_at: new Date(),
+      order_placed_at: new Date().toISOString(),
       order_amount_final: item.item_price,
       items:
         item.item_id +
@@ -104,18 +104,9 @@ const RestaurentTemplate = ({ status }) => {
       user_id: getUserData().accessToken.payload.sub,
     };
 
-    // "items": "IT001, IT002",
-    // // "customer_mobile": "9891223344",
-    // // "order_id": "OR0001",
-    // "ID": "A00015",
-    // "menu_id": "M0001",
-    // "NewValue": "",
-    // "customer_name": "Ajay Kumar Madan",
-    // "user_id": "06e6331b-5d12-4cda-a313-dc7a520df615"
-
     placeOrder(body)
       .then((res) => {
-        if (res.data.statusCode === 200);
+        if (res.status == 200);
         successToaster("Successfully placed the order");
         setOrder(true);
 

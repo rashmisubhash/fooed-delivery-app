@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { CognitoUser } from "amazon-cognito-identity-js";
 
 import UserPool from "../UserPool";
-// import customToast from "../reusable/Toast";
 import { successToaster, errorToaster } from "../reusable/Toast";
 
-const Verify = ({ email, setOpenModal }) => {
+const Verify = ({ email, setLogin }) => {
   const [verification, setVerfification] = useState("");
   const [apiError, setApiError] = useState("");
 
@@ -21,16 +20,13 @@ const Verify = ({ email, setOpenModal }) => {
 
     cognitoUser.confirmRegistration(verification, true, (error, success) => {
       if (success) {
-        console.log(success.toString());
         if (success.toString().includes("error")) {
           errorToaster("Something went wrong");
         } else {
-          console.log("success", success);
           successToaster("Signed up successfully");
-          setOpenModal(false);
+          setLogin(true);
         }
       } else {
-        console.log(error.toString().split(":")[1]);
         errorToaster(error.toString().split(":")[1]);
       }
     });

@@ -1,4 +1,4 @@
-import { io } from "socket.io-client";
+import { socketurl } from "../../crud/axios.config";
 import React, { useState, useCallback, useEffect, useContext } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
@@ -33,78 +33,7 @@ const OrderModal = ({ order, setOrder }) => {
   const [allorders, SetAllOrders] = useState([]);
   const [ordersAPI, SetOrdersAPI] = useState(false);
   const { getUserData } = useContext(AccountContext);
-
-  // const [messageHistory, setMessageHistory] = useState([]);
-
-  // const {
-  //   sendMessage,
-  //   sendJsonMessage,
-  //   lastMessage,
-  //   lastJsonMessage,
-  //   readyState,
-  //   getWebSocket,
-  // } = useWebSocket("wss://g0m7cr37nf.execute-api.eu-west-2.amazonaws.com/dev", {
-  //   onOpen: () => console.log("opened"),
-  //   shouldReconnect: (closeEvent) => true,
-  //   queryParams: {
-  //     user_id: "c40f70ee-437e-4883-ba73-42e159f69e8d",
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   if (lastMessage !== null) {
-  //     setMessageHistory((prev) => prev.concat(lastMessage));
-  //   }
-  // }, [lastMessage, setMessageHistory]);
-
-  // const connectionStatus = {
-  //   [ReadyState.CONNECTING]: "Connecting",
-  //   [ReadyState.OPEN]: "Open",
-  //   [ReadyState.CLOSING]: "Closing",
-  //   [ReadyState.CLOSED]: "Closed",
-  //   [ReadyState.UNINSTANTIATED]: "Uninstantiated",
-  // }[readyState];
-
-  // ----------------------------------------------------------
-
-  // const [varThatNeedHooks, setVar] = useState({});
-  // const [serverMessage, setServerMessage] = useState("");
-  // const [webSocketReady, setWebSocketReady] = useState(false);
-
-  // const [webSocket, setWebSocket] = useState(
-  //   new WebSocket("ws://127.0.0.1:3000/ws")
-  // );
-
-  // const getSockets = () => {
-  //   // const webSocket = new WebSocket("ws://127.0.0.1:3000/ws");
-
-  //   webSocket.onopen = (event) => {
-  //     setWebSocketReady(true);
-  //   };
-
-  //   webSocket.onmessage = function (event) {
-  //     setServerMessage(JSON.parse(event.data));
-  //   };
-
-  //   webSocket.onclose = function (event) {
-  //     setWebSocketReady(false);
-  //     setTimeout(() => {
-  //       setWebSocket(new WebSocket("ws://127.0.0.1:3000/ws"));
-  //     }, 1000);
-  //   };
-
-  //   webSocket.onerror = function (err) {
-  //     console.log("Socket encountered error: ", err.message, "Closing socket");
-  //     setWebSocketReady(false);
-  //     webSocket.close();
-  //   };
-
-  //   return () => {
-  //     webSocket.close();
-  //   };
-  // };
-
-  // ----------------------------------------------------------
+  const [countOrder, setCountOrder] = useState(0);
 
   const [socketUrl, setSocketUrl] = useState(null);
   const [messageHistory, setMessageHistory] = useState([]);
@@ -137,17 +66,44 @@ const OrderModal = ({ order, setOrder }) => {
   }[readyState];
 
   useEffect(() => {
-    if (order) {
-      getAllOrders();
-      setSocketUrl("wss://g0m7cr37nf.execute-api.eu-west-2.amazonaws.com/dev");
-    } else {
-      setSocketUrl(null);
-    }
+    (async () => {
+      if (order) {
+        const tempOrders = await getAllOrders();
+        const count = await countCollect(tempOrders);
+        setCountOrder(count);
+        (connectionStatus !== "Connecting" || connectionStatus !== "Open") &&
+          count > 0 &&
+          setSocketUrl(
+            socketurl.apiUrl
+            // "wss://g0m7cr37nf.execute-api.eu-west-2.amazonaws.com/dev"
+          );
+
+        console.log("socketurl.apiUrl", socketurl.apiUrl);
+        // setSocketUrl(socketurl.apiUrl);
+      } else {
+        setSocketUrl(null);
+      }
+    })();
   }, [order]);
 
-  const getAllOrders = () => {
-    getAllOrdersForCustomer(getUserData().idToken.payload.phone_number.slice(1))
-      .then((res) => {
+  useEffect(() => {
+    lastMessage && lastMessage.data && getAllOrders();
+  }, [lastMessage]);
+
+  function countCollect(tempOrders) {
+    let count = 0;
+    for (let item = 0; item < tempOrders.length; item++) {
+      if (item.order_status != "Order Delivered") count = count + 1;
+    }
+    return count;
+  }
+
+  const getAllOrders = async () => {
+    try {
+      const res = await getAllOrdersForCustomer(
+        getUserData().idToken.payload.phone_number.slice(1)
+      );
+      if (res) {
         const tempOrders = res.data;
         SetAllOrders(
           tempOrders.filter((item) => {
@@ -156,19 +112,16 @@ const OrderModal = ({ order, setOrder }) => {
           })
         );
         SetOrdersAPI(true);
-        let count = 0;
-        tempOrders.filter((item) => {
-          if (item.order_status != "Order Delivered") count += 1;
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+        return tempOrders;
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div>
-      {console.log("connectionStatus", connectionStatus)}
       <Modal
         ariaHideApp={false}
         isOpen={order}
@@ -177,7 +130,7 @@ const OrderModal = ({ order, setOrder }) => {
         }}
         style={customStyles}
       >
-        <div className="px-5 py-4">
+        <div className="modal-container">
           <h1 className="restaurent-name text-center mb-0">All Orders</h1>
           <hr className="my-0" />
           <hr className="mt-0" />
@@ -209,6 +162,16 @@ const OrderModal = ({ order, setOrder }) => {
       <style jsx>{`
         .ReactModal__Content--after-open {
           width: ${allorders.length > 0 ? "60%" : "80"};
+        }
+
+        .modal-container {
+          padding: 2rem 2rem 3rem;
+        }
+
+        @media screen and (max-width: 1065px) {
+          .modal-container {
+            padding: 1rem 0rem;
+          }
         }
       `}</style>
     </div>

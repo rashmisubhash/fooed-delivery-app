@@ -4,12 +4,11 @@ import axios from "./axios";
 const API_URL = api.apiUrl;
 const DEV = "/dev/";
 
-const restaurant = "restaurant";
+const createOrder = "create-order";
 const order = "order";
-const menuitem = "menuitem";
 
 export const placeOrder = (payload) => {
-  return axios.post(API_URL + DEV + order, payload);
+  return axios.post(API_URL + DEV + createOrder, payload);
 };
 
 export const getAllOrdersForCustomer = (customer_mobile) => {

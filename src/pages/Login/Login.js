@@ -44,7 +44,7 @@ const LoginModal = ({ getUserData, setOpenModal }) => {
             <div class="loginmodal-container">
               <h1>Sign Up</h1>
               <br />
-              <Signup setOpenModal={setOpenModal} />
+              <Signup setOpenModal={setOpenModal} setLogin={setLogin} />
 
               <div className="login-help mt-2">
                 <button className="" onClick={() => setLogin(true)}>

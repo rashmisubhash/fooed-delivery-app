@@ -6,7 +6,7 @@ import Verify from "./Verify";
 import UserPool from "../UserPool";
 import { successToaster, errorToaster } from "../reusable/Toast";
 
-const Signup = ({ setOpenModal }) => {
+const Signup = ({ setOpenModal, setLogin }) => {
   const [verification, setVerification] = useState(false);
 
   const [name, setName] = useState("");
@@ -100,7 +100,7 @@ const Signup = ({ setOpenModal }) => {
   return (
     <div>
       {verification ? (
-        <Verify email={email} setOpenModal={setOpenModal} />
+        <Verify email={email} setLogin={setLogin} />
       ) : (
         <form onSubmit={onSubmit}>
           <input
