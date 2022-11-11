@@ -5,10 +5,10 @@ import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 const customStyles = {
   option: (styles, { isFocused, isSelected }) => ({
     ...styles,
-    background: isSelected ? "#dd2476" : undefined,
+    background: isSelected ? "#f5502f" : isFocused ? "#fed8b1" : undefined,
     margin: "0px",
     color: isSelected ? "white" : undefined,
-    zIndex: 1,
+    zIndex: 1
   }),
   menu: (provided, state) => ({
     ...provided,
@@ -16,15 +16,15 @@ const customStyles = {
   }),
   dropdownIndicator: (base) => ({
     ...base,
-    color: "#dd2476",
+    color: "#f5502f",
     padding: "5px 8px",
     "&:hover": {
-      color: "#dd2476",
+      color: "#f5502f",
     },
   }),
   control: (base, state) => ({
     ...base,
-    border: state.isFocused ? "1px solid #dd2476" : "1px solid #cdd4db",
+    border: state.isFocused ? "1px solid #f5502f" : "1px solid #cdd4db",
     boxShadow: "none",
     borderRadius: "2px",
     minHeight: "36px",
@@ -51,7 +51,10 @@ const Dropdown = ({ setSelectedType, selectedType, menu }) => {
         options={optionCustom()}
       />
 
-      <button className="button-primary clear-custom my-0" onClick={() => setSelectedType(null)}>
+      <button
+        className="button-primary clear-custom my-0"
+        onClick={() => setSelectedType(null)}
+      >
         X
       </button>
 

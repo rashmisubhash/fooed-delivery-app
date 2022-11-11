@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import { getAllRestaurents } from "../crud/apis.crud";
 
 const Restaurents = () => {
   const history = useNavigate();
@@ -74,17 +75,12 @@ const Restaurents = () => {
     },
   ]);
 
-  const fetchURL =
-    "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant";
-  // "https://raw.githubusercontent.com/euhidaman/Fake_APIs/main/restaurant_details.json";
-
   useEffect(() => {
     getAllResDetails();
   }, []);
 
   const getAllResDetails = () => {
-    axios
-      .get(fetchURL)
+    getAllRestaurents()
       .then((res) => {
         const allDetails = res.data;
         setRestaurentList(allDetails);

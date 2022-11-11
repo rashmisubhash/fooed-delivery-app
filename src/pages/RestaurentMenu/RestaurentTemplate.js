@@ -1,5 +1,13 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import {
+  getAllRestaurents,
+  getAllMenus,
+  getMenuItems,
+  getMenuType,
+} from "../../crud/apis.crud";
+import { placeOrder } from "../../crud/orders.crud";
 
 import OrderModal from "../Orders/OrderModal";
 import "./templace.css";
@@ -9,6 +17,8 @@ import { AccountContext } from "../../auth/Account";
 import { successToaster, errorToaster } from "../../reusable/Toast";
 
 const RestaurentTemplate = ({ status }) => {
+  const history = useNavigate();
+
   const [restaurentInfo, setRestaurentInfo] = useState(null);
   const [menuItemsForRes, setMenuItemsForRes] = useState(null);
   const [menu, setMenu] = useState(null);
@@ -24,10 +34,7 @@ const RestaurentTemplate = ({ status }) => {
   }, []);
 
   const getResDetails = () => {
-    axios
-      .get(
-        "https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/restaurant"
-      )
+    getAllRestaurents()
       .then((res) => {
         const allDetails = res.data;
         res.data.map((item) => {
@@ -41,13 +48,7 @@ const RestaurentTemplate = ({ status }) => {
   };
 
   const getMenuDetails = () => {
-    axios
-      .get(
-        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menu?restaurant_id=${document.location.pathname.substring(
-          1,
-          6
-        )}`
-      )
+    getAllMenus(document.location.pathname.substring(1, 6))
       .then((res) => {
         setMenu(res.data);
       })
@@ -57,13 +58,7 @@ const RestaurentTemplate = ({ status }) => {
   };
 
   const getMenuItemsForRes = () => {
-    axios
-      .get(
-        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menuitem?restaurant_id=${document.location.pathname.substring(
-          1,
-          6
-        )}`
-      )
+    getMenuItems(document.location.pathname.substring(1, 6))
       .then((res) => {
         const allDetails = res.data;
         setMenuItemsForRes(allDetails);
@@ -76,10 +71,7 @@ const RestaurentTemplate = ({ status }) => {
   useEffect(() => {
     // Filter change
     if (selectedType != null) {
-      axios
-        .get(
-          `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/menuitem?menu_id=${selectedType.value}`
-        )
+      getMenuType(selectedType.value)
         .then((res) => {
           // setMenuItemsForRes(res.data);
         })
@@ -94,7 +86,7 @@ const RestaurentTemplate = ({ status }) => {
       restaurant_id: item.restaurant_id,
       order_amount: item.item_price,
       order_discount: 0,
-      order_placed_at: "28 Oct 2022, 10 AM",
+      order_placed_at: new Date(),
       order_amount_final: item.item_price,
       items:
         item.item_id +
@@ -104,26 +96,27 @@ const RestaurentTemplate = ({ status }) => {
         item.item_price +
         "," +
         item.image_url,
-      // items: "IT003,Veg Manchurian Gravy,150,http://awssatraining.s3-website-us-east-1.amazonaws.com/veg_manchurian.jfif; IT002,Veg Fried Rice,120,http://awssatraining.s3-website-us-east-1.amazonaws.com/veg_fried_rice.jfif",
       Type: "Order",
       customer_mobile: getUserData().idToken.payload.phone_number.slice(1),
       order_status: "Order Placed",
-      // order_id: "OR0001",
-      // ID: "A00015",
       menu_id: item.menu_id,
-      // NewValue: "",
       customer_name: getUserData().idToken.payload.name,
+      user_id: getUserData().accessToken.payload.sub,
     };
 
-    axios
-      .post(
-        `https://n39qrnkqc9.execute-api.eu-west-2.amazonaws.com/dev/order`,
-        body
-      )
+    // "items": "IT001, IT002",
+    // // "customer_mobile": "9891223344",
+    // // "order_id": "OR0001",
+    // "ID": "A00015",
+    // "menu_id": "M0001",
+    // "NewValue": "",
+    // "customer_name": "Ajay Kumar Madan",
+    // "user_id": "06e6331b-5d12-4cda-a313-dc7a520df615"
+
+    placeOrder(body)
       .then((res) => {
         if (res.data.statusCode === 200);
-        successToaster("Successfully place the order");
-        console.log("res", res);
+        successToaster("Successfully placed the order");
         setOrder(true);
 
         // setMenuItemsForRes(res.data);
@@ -139,7 +132,6 @@ const RestaurentTemplate = ({ status }) => {
     restaurentInfo != null &&
     menu != null && (
       <div>
-        {console.log(getUserData())}
         <OrderModal order={order} setOrder={setOrder} status={status} />
         <main className="container">
           <section className="hero-container">
@@ -222,7 +214,7 @@ const RestaurentTemplate = ({ status }) => {
                                   )
                             }
                           >
-                            Order Now
+                            Order Now at ₹{item.item_price}
                           </button>
                           <img
                             src={item.image_url}

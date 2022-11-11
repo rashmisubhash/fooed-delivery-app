@@ -8,6 +8,7 @@ import OrderModal from "./Orders/OrderModal";
 
 import { AccountContext } from "../auth/Account";
 import { successToaster, errorToaster } from "../reusable/Toast";
+import zomatoWhiteLogog from "../assets/images/delivery-logo.png";
 
 const customStyles = {
   // Style for the Modal
@@ -46,7 +47,7 @@ const Nav = () => {
         <nav className="navbar px-5 py-0">
           <div className="navbar-brand">
             <img
-              src={logo}
+              src={zomatoWhiteLogog}
               alt="Logo"
               class="brand-logo"
               onClick={() => {
@@ -89,10 +90,6 @@ const Nav = () => {
       <style jsx>{`
         .login {
           cursor: pointer;
-        }
-
-        .navbar-nav-items {
-          transform: translateY(-18px);
         }
       `}</style>
     </div>

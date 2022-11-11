@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { AccountContext } from "./Account";
+import { setJwtToken } from "../crud/axios";
 
 const Status = ({ setStatus }) => {
   const { getSession, logout } = useContext(AccountContext);
@@ -8,6 +9,7 @@ const Status = ({ setStatus }) => {
   useEffect(() => {
     getSession()
       .then((session) => {
+        setJwtToken(session.idToken.jwtToken);
         setStatus(session);
       })
       .catch((err) => setStatus(false));

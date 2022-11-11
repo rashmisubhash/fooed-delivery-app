@@ -52,12 +52,12 @@
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.navbar-brand img {
+/* .navbar-brand img {
   transform: translateY(-18px);
-}
+} */
 
 .brand-logo {
-  width: 100%;
+  width: 50%;
   height: 100%;
 }
 .navbar-brand {

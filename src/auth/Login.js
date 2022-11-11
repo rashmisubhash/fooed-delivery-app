@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
+import { setJwtToken } from '../crud/axios';
 import { AccountContext } from "./Account";
 import UserPool from "../UserPool";
 import { successToaster, errorToaster } from "../reusable/Toast";
@@ -16,7 +17,7 @@ const Login = ({ setOpenModal }) => {
 
     authenticate(email, password)
       .then((data) => {
-        // console.log("dat", data);
+        setJwtToken(data.idToken.jwtToken);
         successToaster("Successfully logged in");
         setOpenModal(false);
       })

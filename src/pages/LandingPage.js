@@ -2,7 +2,7 @@ import React from "react";
 import Restaurents from "./Restaurents";
 
 import landingPageImage from "../assets/images/landingPageImage.jpg";
-import zomatoWhiteLogog from "../assets/images/zomatoWhiteLogog.avif";
+import zomatoWhiteLogog from "../assets/images/delivery-logo.png";
 
 const LandingPage = () => {
   return (
@@ -19,11 +19,12 @@ const LandingPage = () => {
             </div>
             <div className="contentWrapper">
               {/* <div className="zomatoImageContainer"> */}
-              <img
+              <h1>Store To Door</h1>
+              {/* <img
                 src={zomatoWhiteLogog}
                 alt="Zomato Logo"
                 className="zomatoImage"
-              />
+              /> */}
               {/* </div> */}
               <h2 className="description">Discover the best food & drinks</h2>
             </div>
@@ -52,7 +53,7 @@ const LandingPage = () => {
         .landingPageImageContainer {
           overflow: hidden;
           position: absolute;
-          top: 20px;
+          top: 0px;
           left: 0px;
           width: 100%;
           height: 100%;
@@ -79,6 +80,26 @@ const LandingPage = () => {
           flex-direction: column;
         }
 
+        .contentWrapper h1 {
+          position: absolute;
+          background: none;
+          bottom: calc(50% + 6rem);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          color: white;
+          font-weight: 400;
+          font-family: "Poppins";
+          background: none;
+
+          text-align: center;
+          font-size: 3.6rem;
+          font-style: italic;
+        }
+
         .zomatoImageContainer {
           height: 65px;
           width: 18rem;
@@ -101,7 +122,7 @@ const LandingPage = () => {
           font-family: "Poppins";
           position: absolute;
           background: none;
-
+          bottom: calc(50% + 1rem);
           color: white;
           text-align: center;
           font-size: 3.6rem;
