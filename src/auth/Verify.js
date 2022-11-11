@@ -6,7 +6,6 @@ import { successToaster, errorToaster } from "../reusable/Toast";
 
 const Verify = ({ email, setLogin }) => {
   const [verification, setVerfification] = useState("");
-  const [apiError, setApiError] = useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
