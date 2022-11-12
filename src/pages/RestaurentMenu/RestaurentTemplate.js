@@ -156,7 +156,7 @@ const RestaurentTemplate = ({ status }) => {
               {/* <p>{restaurentInfo.restaurant_type}</p>
               <p>{restaurentInfo.restaurant_description}</p>
               <p>{restaurentInfo.restaurant_address}</p> */}
-              <h1 className="hero-text">
+              <h1 className="custom-text hero-text custom-text-cu">
                 Order food from your favourite restaurant.
               </h1>
 
@@ -252,7 +252,7 @@ const RestaurentTemplate = ({ status }) => {
           </section>
           <section className="restaurant-list-container">
             <div className="restaurant-list-text">
-              <h1 className="hero-text">
+              <h1 className="custom-text-cu hero-text custom-text">
                 Order food from favourite restaurants near you.
               </h1>
             </div>

@@ -11,6 +11,11 @@ body {
   transition: all 0.5s;
 }
 
+.custom-text,
+.custom-text-cu {
+  color: #ff3912 !important;
+}
+
 button {
   background: transparent;
   border: none;
